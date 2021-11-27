@@ -183,15 +183,18 @@ _absolute X/Y/Z/W motion packet (Wmode = 1)_
 ![TM4PUF1372 WH511-095](https://github.com/RootShell-coder/PS2Mouse/blob/master/add/TM4PUF1372%20WH511-095.png "TM4PUF1372 WH511-095")
 
 Подключение к nodemcu V3 (esp8266)
-| touchpab   |       |  nodemcu V3    |
+| touchpad   |       |  nodemcu V3    |
 |----|-------|------|
 |T22 | (3.3v) |  3V |
 |T10 | (SCL) | GPIO5 (D1)|
 |T11 |(SDA/DATA) | GPIO4 (D2)|
 |T23 |(GND)  |GROUND |
 
-При успешной инициализации Synaptics touchpad в консоль будет выведен текст `TouchPad: Synaptics, id: 1000111, minor rev.: 1001, major: 10101, state: init completed`
-Это активирует расширенный 6 байтовый протокол обмена данными. absolute X/Y/Z/W motion packet (Wmode = 1) и как только будут получены данные от touthpad они через функцию прерывания handleInterrupt запишутся в массив raw и в loop выведутся сырые данные.
+При успешной инициализации Synaptics touchpad в консоль будет выведен текст
+
+`TouchPad: Synaptics, id: 1000111, minor rev.: 1001, major: 10101, state: init completed`
+
+При этом активируется расширенный, 6 байтовый режим обмена данными. absolute X/Y/Z/W motion packet (Wmode = 1) и как только будут получены данные от touthpad они через функцию прерывания handleInterrupt запишутся в массив raw и в loop выведутся сырые данные.
 ```C++
 #include <ESP8266WiFi.h>
 #include <PS2Mouse.h>
