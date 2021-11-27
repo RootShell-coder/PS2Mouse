@@ -173,7 +173,60 @@ Initialization complete...
         <td colspan="8" align="center">y position 7..0 <br></td>
     </tr>
 </table>
+
 _absolute X/Y/Z/W motion packet (Wmode = 1)_
 
 На типичных сенсорных панелях бит L/U идентичен биту левой кнопки, а бит R/D идентичен биту Right. На пэдах MultiSwitch с установленным битом возможностей capFourButtons и включенным Wmode биты L/U и R/D также сообщают о положениях кнопок Up и Down соответственно. Бит L/U сообщает о логическом исключающем ИЛИ для состояний кнопок "Влево" и "Вверх". С другой стороны, L/U - это то же самое, что и левый бит, если только не нажата кнопка Up, и в этом случае L/U является дополнением к левому биту. Бит R/D аналогичным образом выполняет XOR кнопок вправо и вниз. Это кодирование гарантирует, что пакет будет обратно совместим (и устойчив к вмешательству со стороны "слишком умных" контроллеров клавиатуры) всякий раз, когда не нажимаются кнопки "Вверх" и "Вниз". Некоторые сенсорные панели MultiSwitch используют другой формат, в котором можно разместить до 11 кнопок. Пакет абсолютного режима, как и пакет относительного режима, содержит несколько бит, которые сообщают о состоянии кнопок. Важно отметить, что в абсолютном режиме физические кнопки сообщаются отдельно от жестов касания и скольжения. В относительном режиме, совместимом с мышью, жесты и кнопки смешиваются, и хост не может их различить. Сенсорные панели Synaptics поддерживают дополнительное значение в пакете Absolute, называемое W mode. Значение W сообщается только тогда, когда хост включает специальный режим W. Значение W предоставляет дополнительную информацию о характере контакта с датчиком. Хост может использовать W, чтобы различать нормальные пальцы, случайный контакт ладони и несколько пальцев. 
 
+## Подключение
+![Synaptics T1004B](https://github.com/RootShell-coder/PS2Mouse/blob/master/add/Synaptics%20T1004B.png "Synaptics T1004B")
+![TM4PUF1372 WH511-095](https://github.com/RootShell-coder/PS2Mouse/blob/master/add/TM4PUF1372%20WH511-095.png "TM4PUF1372 WH511-095")
+
+При подключении к nodemcu V3 (esp8266)
+T22 (3.3v) - 3V
+T10 (SCL) - GPIO5 (D1)
+T11 (SDA/DATA) - GPIO4 (D2)
+T23 (GND)  - G
+
+При успешной инициализации Synaptics touchpad в консоль будет выведен текст `TouchPad: Synaptics, id: 1000111, minor rev.: 1001, major: 10101, state: init completed`
+Это активирует расширенный 6 байтовый протокол обмена данными. absolute X/Y/Z/W motion packet (Wmode = 1) и как только будут получены данные от touthpad они через функцию прерывания handleInterrupt запишутся в массив raw и в loop выведутся сырые данные.
+```C++
+#include <ESP8266WiFi.h>
+#include <PS2Mouse.h>
+
+
+PS2Mouse mouse(SCL, SDA);
+void IRAM_ATTR handleInterrupt();
+
+
+void setup() {
+  Serial.begin(115200);
+  mouse.begin();
+  attachInterrupt(digitalPinToInterrupt(SCL), handleInterrupt, FALLING);
+
+}
+
+byte raw[6];
+
+void handleInterrupt() {
+  noInterrupts();
+    for(int i = 0; i < 6; i++){
+      raw[i] = mouse.get(true);
+    }
+  interrupts();
+}
+
+void loop() {
+  if(raw[0] != 0 && raw[0] != 0x80){
+        Serial.print("Z pressure ");
+        Serial.print(raw[2]);
+        Serial.print("\t");
+        Serial.print("X position ");
+        Serial.print(raw[4]);
+        Serial.print("\t");
+        Serial.print("Y position ");
+        Serial.println(raw[5]);
+    }
+}
+```
+Если по какой то причине не удается получить абсолютный режим инициализируется 3х байтный Relative mode и массив raw нужно использовать длинной 3 при этом пересчитав циклы для этого массива.
