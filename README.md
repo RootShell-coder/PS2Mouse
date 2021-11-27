@@ -35,3 +35,7 @@ library for connecting Synaptics TouchPad to arduino
         <td colspan="8" align="center">Y Movement 7...0</td>
     </tr>
 </table>
+
+Каждый byte состоит из 11 bit
+![11 bit](https://github.com/RootShell-coder/PS2Mouse/blob/master/add/Byte%20transmission.png "11 bit")
+Стартовый bit, 8 bit данных, bit контроля четности (нечетный) и стоповый бит. _Хост читает по спаду устройство по фронту._  
