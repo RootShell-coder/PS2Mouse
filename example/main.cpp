@@ -4,6 +4,7 @@
 PS2Mouse mouse(SCL, SDA);
 void IRAM_ATTR handleInterrupt();
 
+byte raw[6];
 void setup() {
   Serial.begin(115200);
   mouse.begin();
@@ -14,30 +15,20 @@ void setup() {
 void handleInterrupt() {
   noInterrupts();
     for(int i = 0; i < 6; i++){
-      mouse.raw[i] = mouse.get(true);
+      raw[i] = mouse.get(true);
     }
   interrupts();
 }
 
 void loop() {
-/*
-    if(mouse.raw[0] != 0 && mouse.raw[0] != 0x80){
-      for (uint8_t i =0; i < 6; i++){
-        Serial.print(mouse.raw[i], BIN);
-        Serial.print("\t");
-      }
-      Serial.println();
-    }
-*/
-
-  if(mouse.raw[0] != 0 && mouse.raw[0] != 0x80){
+  if(raw[0] != 0 && raw[0] != 0x80){
         Serial.print("Z pressure ");
-        Serial.print(mouse.raw[2]);
+        Serial.print(raw[2]);
         Serial.print("\t");
         Serial.print("X position ");
-        Serial.print(mouse.raw[4]);
+        Serial.print(raw[4]);
         Serial.print("\t");
         Serial.print("Y position ");
-        Serial.println(mouse.raw[5]);
+        Serial.println(raw[5]);
     }
 }

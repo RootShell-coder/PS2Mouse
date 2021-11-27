@@ -2,7 +2,7 @@
 library for connecting Synaptics TouchPad to arduino
 
 ## Интерфейс мыши PS/2
-Стандартная мышь PS/2 отправляет информацию о движении (и кнопках) на хост, используя следующий 3-байтовый пакет 
+Стандартная мышь PS/2 отправляет информацию о движении (и кнопках) на хост, используя следующий 3-байтовый пакет
 <table>
     <tr>
         <td></td>
@@ -10,7 +10,7 @@ library for connecting Synaptics TouchPad to arduino
         <td>Bit 6</td>
         <td>Bit 5</td>
         <td>Bit 4</td>
-        <td>Bit 3**</td>
+        <td>Bit 3</td>
         <td>Bit 2</td>
         <td>Bit 1</td>
         <td>Bit 0</td>
@@ -38,4 +38,4 @@ library for connecting Synaptics TouchPad to arduino
 
 Каждый byte состоит из 11 bit
 ![11 bit](https://github.com/RootShell-coder/PS2Mouse/blob/master/add/Byte%20transmission.png "11 bit")
-Стартовый bit, 8 bit данных, bit контроля четности (нечетный) и стоповый бит. _Хост читает по спаду устройство по фронту._  
+Стартовый bit, 8 bit данных, bit контроля четности (нечетный) и стоповый бит. _Хост читает по спаду устройство по фронту._

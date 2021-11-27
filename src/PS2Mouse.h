@@ -20,6 +20,5 @@ class PS2Mouse{
         PS2Mouse();
         bool begin();
         byte get(bool handler = false);
-        int16_t raw[6];
 };
 #endif
