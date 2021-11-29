@@ -8,7 +8,6 @@ void setup() {
   Serial.begin(115200);
   mouse.begin();
   attachInterrupt(digitalPinToInterrupt(SCL), handleInterrupt, FALLING);
-
 }
 
 byte raw[6];
