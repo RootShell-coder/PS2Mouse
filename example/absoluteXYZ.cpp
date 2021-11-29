@@ -12,7 +12,6 @@ void setup() {
 }
 
 byte raw[6];
-  char Str[16];
 void handleInterrupt() {
   noInterrupts();
     for(int i = 0; i < 6; i++){
