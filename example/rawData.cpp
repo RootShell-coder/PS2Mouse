@@ -22,13 +22,15 @@ void handleInterrupt() {
 
 void loop() {
   if(raw[0] != 0 && raw[0] != 0x80){
-        Serial.print("Z pressure ");
-        Serial.print(raw[2]);
+        Serial.print(raw[0]);
         Serial.print("\t");
-        Serial.print("X position ");
+        Serial.print(raw[1]);
+        Serial.print("\t");
+        Serial.println(raw[2]);
+        Serial.print(raw[3]);
+        Serial.print("\t");
         Serial.print(raw[4]);
         Serial.print("\t");
-        Serial.print("Y position ");
         Serial.println(raw[5]);
     }
 }
