@@ -80,7 +80,7 @@ bool PS2Mouse::begin(){
     send(0xF5);                                         // Disable before activate Absolute mode
     /*Synaptics mode byte (6 Bit)*/
     //send_tp_arg(0x81);                                //it does not always work I do not know the reason
-    send(0xE8); send(0x03); send(0xE8); send(0x00); send(0xE8); send(0x00); send(0xE8); send(0x00); send(0xF3); send(0x14);
+    send(0xE8); send(0x02); send(0xE8); send(0x00); send(0xE8); send(0x00); send(0xE8); send(0x01); send(0xF3); send(0x14);
   }
 
   //send(0xE7);                                         // E6 Set Scaling 1:1 / E7 Set Scaling 2:1
