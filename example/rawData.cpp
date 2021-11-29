@@ -21,16 +21,17 @@ void handleInterrupt() {
 }
 
 void loop() {
-  if(raw[0] != 0 && raw[0] != 0x80){
-        Serial.print(raw[0]);
+      if(raw[0] != 0 && raw[0] != 0x80){
+        Serial.print(raw[0],BIN);
         Serial.print("\t");
-        Serial.print(raw[1]);
+        Serial.print(raw[1],BIN);
         Serial.print("\t");
-        Serial.println(raw[2]);
-        Serial.print(raw[3]);
+        Serial.println(raw[2],BIN);
+        Serial.print("\t");   
+        Serial.print(raw[3],BIN);
         Serial.print("\t");
-        Serial.print(raw[4]);
+        Serial.print(raw[4],BIN);
         Serial.print("\t");
-        Serial.println(raw[5]);
-    }
+        Serial.println(raw[5],BIN);
+     }
 }
