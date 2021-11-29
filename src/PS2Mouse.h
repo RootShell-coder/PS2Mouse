@@ -20,5 +20,7 @@ class PS2Mouse{
         PS2Mouse();
         bool begin();
         byte get(bool handler = false);
+        uint16_t absoluteAxisY(uint8_t *raw);
+        uint16_t absoluteAxisX(uint8_t *raw);
 };
 #endif

@@ -83,10 +83,10 @@ bool PS2Mouse::begin(){
     send(0xE8); send(0x02); send(0xE8); send(0x00); send(0xE8); send(0x00); send(0xE8); send(0x01); send(0xF3); send(0x14);
   }
 
-  //send(0xE7);                                         // E6 Set Scaling 1:1 / E7 Set Scaling 2:1
+  //send(0xE6);                                         // E6 Set Scaling 1:1 / E7 Set Scaling 2:1
 
   //send(0xE8);                                         // E8 Set Resolution (argument 0-3)
-  //send(0x03);                                         // Sample Resolution argument of 3
+  //send(0x00);                                         // Sample Resolution argument of 3
 
   //send(0xF3);                                         // F3 Set Sample Rate (argument $00-$FF)
   //send(0x14);                                         // Sample Rate argument Valid sample rates are 10, 20, 40, 60, 80, 100, and 200 samples/sec
@@ -199,4 +199,12 @@ void PS2Mouse::high(uint8_t pin) {
 void PS2Mouse::low(uint8_t pin) {
     pinMode(pin, OUTPUT);
     digitalWrite(pin, LOW);
+}
+
+uint16_t PS2Mouse::absoluteAxisY(uint8_t *raw){
+      return ((raw[3] & 0x20) >> 5) << 12 | ((raw[1] & 0xF0) << 4) | raw[5];
+}
+
+uint16_t PS2Mouse::absoluteAxisX(uint8_t *raw){
+      return ((raw[3] & 0x10) >> 4) << 12 | (raw[1] & 0xF) << 8 | raw[4];
 }
