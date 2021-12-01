@@ -201,10 +201,7 @@ void PS2Mouse::low(uint8_t pin) {
     digitalWrite(pin, LOW);
 }
 
-uint16_t PS2Mouse::absoluteAxisY(uint8_t *raw){
-      return ((raw[3] & 0x20) >> 5) << 12 | ((raw[1] & 0xF0) << 4) | raw[5];
-}
-
-uint16_t PS2Mouse::absoluteAxisX(uint8_t *raw){
-      return ((raw[3] & 0x10) >> 4) << 12 | (raw[1] & 0xF) << 8 | raw[4];
+void PS2Mouse::getAbsoluteAxis(byte *raw, uint16_t &x, uint16_t &y){
+  x = ((raw[3] & 0x10) >> 4) << 12 | (raw[1] & 0xF) << 8 | raw[4];
+  y = ((raw[3] & 0x20) >> 5) << 12 | ((raw[1] & 0xF0) << 4) | raw[5];
 }
