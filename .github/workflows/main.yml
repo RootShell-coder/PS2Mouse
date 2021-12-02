@@ -36,6 +36,6 @@ jobs:
       env:
         PLATFORMIO_CI_SRC: ${{ matrix.example }}
     - name: PlatformIO Publish
-      uses: ${{ secrets.PLATFORMIO_USERNAME }}/PS2Mouse@{{ version }}
+      uses: rootshell/PS2Mouse@{{ version }}
       with:
         token: ${{ secrets.PLATFORMIO }}
