@@ -1,4 +1,17 @@
 {
   "name": "PS2Mouse",
-  "version": "0.0.0+20211126001438"
+  "description": "library for connecting Synaptics TouchPad to arduino",
+  "keywords": "Synaptics TouchPad",
+  "authors": {
+    "name": "RootShell-coder",
+    "email": "Root.Shelling@gmail.com",
+    "url": "https://github.com/RootShell-coder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RootShell-coder/PS2Mouse"
+  },
+  "frameworks": "arduino",
+  "platforms": ["espressif8266"],
+  "version": "0.0.1"
 }
