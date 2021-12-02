@@ -7,11 +7,12 @@
   "authors": {
     "name": "rootshell",
     "email": "Root.Shelling@gmail.com",
-    "url": "https://github.com/RootShell-coder"
+    "url": "https://github.com/RootShell-coder",
+    "maintainer": true
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RootShell-coder/PS2Mouse"
+    "url": "https://github.com/RootShell-coder/PS2Mouse.git"
   },
   "exclude": [
     "./add"
