@@ -5,6 +5,7 @@ PS2Mouse mouse(SCL, SDA);
 void IRAM_ATTR handleInterrupt();
 
 uint16_t x, y;
+byte raw[6];
 
 void setup() {
   Serial.begin(115200);
@@ -12,8 +13,6 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(SCL), handleInterrupt, FALLING);
 }
 
-byte raw[6];
-  char Str[16];
 void handleInterrupt() {
   noInterrupts();
     for(int i = 0; i < 6; i++){
