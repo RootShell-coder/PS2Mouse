@@ -1,5 +1,0 @@
-name: PlatformIO Publish
-uses: rootshell/PS2Mouse
-on: [push]
-with:
-  token: ${{ secrets.PLATFORMIO }}
