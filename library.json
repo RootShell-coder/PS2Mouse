@@ -5,7 +5,7 @@
   "keywords": ["Synaptics", "TouchPad", "Mouse"],
   "license": "MIT",
   "authors": {
-    "name": "RootShell-coder",
+    "name": "rootshell",
     "email": "Root.Shelling@gmail.com",
     "url": "https://github.com/RootShell-coder"
   },
@@ -18,5 +18,5 @@
   ],
   "frameworks": "arduino",
   "platforms": ["espressif8266"],
-  "version": "0.0.2"
+  "version": "0.0.3"
 }
