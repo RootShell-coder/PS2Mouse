@@ -1,6 +1,6 @@
 name: PlatformIO CI
 
-on: [push, pull_request]
+on: push
 
 jobs:
   build:
@@ -35,3 +35,7 @@ jobs:
       run: pio ci --lib="." --board=nodemcuv2 --board=d1_mini
       env:
         PLATFORMIO_CI_SRC: ${{ matrix.example }}
+    - name: PlatformIO Publish
+      uses: ${{ PLATFORMIO_USERNAME }}/PS2Mouse
+      with:
+        token: ${{ secrets.PLATFORMIO }}
