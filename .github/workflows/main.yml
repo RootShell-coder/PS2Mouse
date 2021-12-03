@@ -35,18 +35,9 @@ jobs:
       env:
         PLATFORMIO_CI_SRC: ${{ matrix.example }}
         
-  upgrade-version:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: pocket-apps/action-update-version@v1
-        with:
-          files: 'library.json, library.properties'
-          version-regexp: '\d+.\d+.\d+'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v2
-      - uses: kyoh86/git-vertag-action@v1
-        with:
-          method: minor  # "major", "minor", "patch" or "get"
-        id: vertag
-      - run: echo ${{ steps.vertag.outputs.vertag }}
+    - uses: actions/checkout@v2
+    - uses: kyoh86/git-vertag-action@v1
+      with:
+        method: minor  # "major", "minor", "patch" or "get"
+      id: vertag
+    - run: echo ${{ steps.vertag.outputs.vertag }}
