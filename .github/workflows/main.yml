@@ -35,3 +35,8 @@ jobs:
       env:
         PLATFORMIO_CI_SRC: ${{ matrix.example }}
         
+#    - name: PlatformIO Publish
+#      uses: RootShell-coder/PS2Mouse@0.0.4
+#      with:
+#        token: ${{ secrets.PLATFORMIO }}
+#
