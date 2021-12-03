@@ -20,6 +20,6 @@ class PS2Mouse{
         PS2Mouse();
         bool begin();
         byte get(bool handler = false);
-        int16_t raw[6];
+        void getAbsoluteAxis(byte *raw, uint16_t &x, uint16_t &y);
 };
 #endif
