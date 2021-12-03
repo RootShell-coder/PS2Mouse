@@ -41,3 +41,4 @@ jobs:
         method: minor  # "major", "minor", "patch" or "get"
       id: vertag
     - run: echo ${{ steps.vertag.outputs.vertag }}
+    
