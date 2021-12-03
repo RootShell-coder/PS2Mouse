@@ -1,6 +1,9 @@
 name: PlatformIO CI
 
-on: push
+on:
+  push:
+    branches:
+      - 'master'
 
 jobs:
   build:
@@ -32,27 +35,12 @@ jobs:
       run: pio ci --lib="." --board=nodemcuv2 --board=d1_mini
       env:
         PLATFORMIO_CI_SRC: ${{ matrix.example }}
-        
-  bump-version:
-    name: 'Bump Version on master'
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Checkout source code'
-        uses: 'actions/checkout@v2'
-        with:
-          ref: ${{ github.ref }}
-      - name: 'cat library.json'
-        run: cat ./library.json
-      - name: 'Automated Version Bump'
-        id: version-bump
-        uses: 'phips28/gh-action-bump-version@master'
-        with:
-          tag-prefix: 'v'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: 'cat library.json'
-        run: cat ./library.json
-      - name: 'Output Step'
-        env:
-          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
-        run: echo "new tag $NEW_TAG"
+
+    - uses: actions/checkout@v2
+
+    - name: Fetch latest release version
+      id: fetch-latest-release
+      uses: reloc8/action-latest-release-version@1.0.0
+
+    - name: Test
+      run: echo ${{ steps.fetch-latest-release.outputs.latest-release }}
