@@ -237,7 +237,7 @@ void loop() {
 ```
 Если по какой то причине не удается получить абсолютный режим инициализируется 3х байтный Relative mode и массив raw нужно использовать длинной 3 при этом пересчитав циклы для этого массива.
 
-Для получения точнных координат getAbsoluteAxis
+Для получения точнных координат [examples](https://github.com/RootShell-coder/PS2Mouse/blob/master/examples/absoluteXYZ.ino)
 ```c++
 void loop() {
     if(raw[0] != 0 && raw[0] != 0x80){
