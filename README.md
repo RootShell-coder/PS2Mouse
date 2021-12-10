@@ -225,15 +225,31 @@ void handleInterrupt() {
 
 void loop() {
   if(raw[0] != 0 && raw[0] != 0x80){
-        Serial.print("Z pressure ");
-        Serial.print(raw[2]);
+        Serial.print(raw[2],BIN);
         Serial.print("\t");
-        Serial.print("X position ");
-        Serial.print(raw[4]);
+        Serial.print(raw[3],BIN);
         Serial.print("\t");
-        Serial.print("Y position ");
-        Serial.println(raw[5]);
+        Serial.print(raw[4],BIN);
+        Serial.print("\t");
+        Serial.println(raw[5],BIN);
     }
 }
 ```
 Если по какой то причине не удается получить абсолютный режим инициализируется 3х байтный Relative mode и массив raw нужно использовать длинной 3 при этом пересчитав циклы для этого массива.
+
+Для получения точнных координат getAbsoluteAxis
+```c++
+void loop() {
+    if(raw[0] != 0 && raw[0] != 0x80){
+      mouse.getAbsoluteAxis(raw, x, y);
+      Serial.print("Z pressure ");
+      Serial.print(raw[2]);
+      Serial.print("\t");
+      Serial.print("X position ");
+      Serial.print(x);
+      Serial.print("\t");
+      Serial.print("Y position ");
+      Serial.print(y);
+      Serial.println();
+    }
+```
